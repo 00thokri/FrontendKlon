@@ -13,9 +13,10 @@ body{
 .post
 {
     border-style: solid;
+    border-radius:1.5rem;
     border-color:aliceblue;
-    margin-left: 5rem;
-    margin-right:5rem;
+    margin-left: 10rem;
+    margin-right:10rem;
     margin-top:2rem;
     
 }
@@ -27,6 +28,8 @@ body{
 .post * {
     margin-left:1.5rem;
 }
+
+
 .postTags
 {
     display:flex;
@@ -35,6 +38,7 @@ body{
 .tag{
     background-color: rgb(43, 41, 41);
     border-style:solid;
+    border-radius:0.5rem;
     border-color: rgb(91, 89, 89);
     margin-right:1rem;
 }

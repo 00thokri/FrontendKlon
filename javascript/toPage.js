@@ -29,6 +29,7 @@ export function addPost(sentPost)
     user.classList.add("username");
 
     let body = document.createElement('p'); //limit to 60 characters
+    body.classList.add("postBody");
     body.textContent = sentPost.body;
     checkText(body);
 
