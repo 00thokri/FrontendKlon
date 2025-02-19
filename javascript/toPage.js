@@ -1,5 +1,6 @@
-import { Post } from "./models/post";
+//This code does everything for the main page/index.html
 export let posts = [];
+
 export function addPost(sentPost)
 {
     /*
@@ -15,15 +16,44 @@ export function addPost(sentPost)
     </span>
 </div>
     */
-    
+    const postSection = document.getElementById("postSection");
+    //looped in real application
     let div = document.createElement('div');
+    div.classList.add("post");
+
     let h1 = document.createElement('h1');
-    h1.textContent = "";
+    h1.textContent = sentPost.title;
+
     let user = document.createElement('div');
+    user.textContent = "tempName";
+    user.classList.add("username");
+
     let body = document.createElement('p'); //limit to 60 characters
+    body.textContent = sentPost.body;
+    checkText(body);
+
     let tagSpan = document.createElement('span');
-    //loop tags
+    tagSpan.classList.add("postTags");
+    for(const tag of sentPost.tags)
+    {
+        let tagDiv = document.createElement('div')
+        tagDiv.classList.add("tag");
+        tagDiv.textContent = tag;
+        tagSpan.append(tagDiv);
+    }
+    div.append(h1);
+    div.append(user);
+    div.append(body);
+    div.append(tagSpan);
+    postSection.append(div);
 
+}
 
-
+function checkText(postText)
+{
+    if(postText.textContent.length > 57)
+    {
+        const newText = postText.textContent.slice(0,60);
+        postText.textContent = newText+"...";
+    }
 }
