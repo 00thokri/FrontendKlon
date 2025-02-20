@@ -5,7 +5,7 @@ export class Post{
         body,
         tags,
         reactions,
-        userID,
+        userId,
 )
     {
         this.id=id;
@@ -13,6 +13,6 @@ export class Post{
         this.body = body;
         this.tags = tags;
         this.reactions = reactions;
-        this.userID = userID;
+        this.userId = userId;
     }
 }

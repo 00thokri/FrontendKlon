@@ -1,9 +1,9 @@
 //This code does everything for the main page/index.html
 export let posts = [];
 
-export function addPost(sentPost)
+export function addPost(sentPost, username)
 {
-    /*
+    /* Goal:
     <section id="postSection">
 <div class="post">
     <h1>Post Title</h1>
@@ -16,6 +16,8 @@ export function addPost(sentPost)
     </span>
 </div>
     */
+   
+
     const postSection = document.getElementById("postSection");
     //looped in real application
     let div = document.createElement('div');
@@ -23,9 +25,9 @@ export function addPost(sentPost)
 
     let h1 = document.createElement('h1');
     h1.textContent = sentPost.title;
-
+    
     let user = document.createElement('div');
-    user.textContent = "tempName";
+    user.textContent = username;
     user.classList.add("username");
 
     let body = document.createElement('p'); //limit to 60 characters
@@ -47,6 +49,11 @@ export function addPost(sentPost)
     div.append(body);
     div.append(tagSpan);
     postSection.append(div);
+
+}
+
+export function displayUsers()
+{
 
 }
 
