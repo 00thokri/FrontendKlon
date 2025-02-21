@@ -30,10 +30,7 @@ export function showPost(username, onePost)
 
     let likes = document.createElement('div');
     likes.textContent = "likes: "+onePost.reactions.likes;
-    console.log("likes:"+onePost.reactions.likes);
-    let test = onePost.reactions.likes;
-    let testupdate = test+1;
-    console.log("liketest " + testupdate);
+    
 
     let dislikes = document.createElement('div');
     dislikes.textContent = "dislikes: "+onePost.reactions.dislikes;

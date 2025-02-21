@@ -37,7 +37,6 @@ export async function getCommentsFromDummyJson(postId)
         throw new Error("Failed to fetch comments");
     }
     const allComments = await response.json();
-    console.log(allComments.comments);
     return allComments.comments;
     
 

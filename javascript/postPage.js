@@ -39,7 +39,6 @@ function loadPost() {
     const postsItems = localStorage.getItem("posts");
     const posts = JSON.parse(postsItems);
     for (let post of posts ) {
-      console.log(post);
         if (post.id === postId)
         {
             return post;
