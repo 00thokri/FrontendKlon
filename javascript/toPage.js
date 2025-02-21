@@ -23,6 +23,10 @@ export function addPost(sentPost, username)
     let div = document.createElement('div');
     div.classList.add("post");
 
+    let postLink = document.createElement('a');
+    postLink.href = "post.html?postId=" + sentPost.id;
+    postLink.classList.add("link");
+
     let h1 = document.createElement('h1');
     h1.textContent = sentPost.title;
     
@@ -48,7 +52,8 @@ export function addPost(sentPost, username)
     div.append(user);
     div.append(body);
     div.append(tagSpan);
-    postSection.append(div);
+    postLink.append(div);
+    postSection.append(postLink);
 
 }
 

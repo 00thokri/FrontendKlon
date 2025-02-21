@@ -69,7 +69,6 @@ function renderPosts(posts)
 {
   for(let post of posts)
   {
-    //console.log("userID"+post.userId + "equal? " + findUsername(post.userId));
     addPost(post,findUsername(post.userId));
   }
 }
