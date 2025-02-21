@@ -69,7 +69,7 @@ function renderPosts(posts)
 {
   for(let post of posts)
   {
-    addPost(post,findUsername(post.userId));
+    addPost(post,findUsername(post.userId),false);
   }
 }
 

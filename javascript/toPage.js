@@ -1,7 +1,7 @@
 //This code does everything for the main page/index.html
 export let posts = [];
 
-export function addPost(sentPost, username)
+export function addPost(sentPost, username, fullPost)
 {
     /* Goal:
     <section id="postSection">
@@ -37,7 +37,11 @@ export function addPost(sentPost, username)
     let body = document.createElement('p'); //limit to 60 characters
     body.classList.add("postBody");
     body.textContent = sentPost.body;
-    checkText(body);
+    if(fullPost == false)
+    {
+        checkText(body);
+    }
+    
 
     let tagSpan = document.createElement('span');
     tagSpan.classList.add("postTags");
