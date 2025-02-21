@@ -1,10 +1,5 @@
 //This file does everything with fetching/loading
 const dummy = "https://dummyjson.com";
-export function checkLocalStorage()
-{
-
-}
-
 export async function getPostsFromDummyJson()
 {
     
@@ -33,15 +28,17 @@ export async function getUsersFromDummyJson()
 
 }
 
-export async function getCommentsFromDummyJson()
+export async function getCommentsFromDummyJson(postId)
 {
-    const response = await fetch(dummy+"/comments?limit=0");
+    const response = await fetch(dummy+"/comments/post/"+postId+"?limit=0");
 
     if(!response.ok)
     {
         throw new Error("Failed to fetch comments");
     }
     const allComments = await response.json();
+    console.log(allComments.comments);
     return allComments.comments;
+    
 
 }

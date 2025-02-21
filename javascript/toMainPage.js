@@ -1,7 +1,7 @@
 //This code does everything for the main page/index.html
 export let posts = [];
 
-export function addPost(sentPost, username, fullPost)
+export function addPost(sentPost, username)
 {
     /* Goal:
     <section id="postSection">
@@ -19,7 +19,7 @@ export function addPost(sentPost, username, fullPost)
    
 
     const postSection = document.getElementById("postSection");
-    //looped in real application
+    
     let div = document.createElement('div');
     div.classList.add("post");
 
@@ -37,10 +37,8 @@ export function addPost(sentPost, username, fullPost)
     let body = document.createElement('p'); //limit to 60 characters
     body.classList.add("postBody");
     body.textContent = sentPost.body;
-    if(fullPost == false)
-    {
-        checkText(body);
-    }
+    checkText(body);
+    
     
 
     let tagSpan = document.createElement('span');
@@ -63,7 +61,7 @@ export function addPost(sentPost, username, fullPost)
 
 export function displayUsers()
 {
-
+    //used to show the users in a dropdown when create post is clicked
 }
 
 function checkText(postText)

@@ -1,5 +1,5 @@
 import { getPostsFromDummyJson, getUsersFromDummyJson } from "./load.js";
-import { addPost } from "./toPage.js";
+import { addPost } from "./toMainPage.js";
 import { Post } from "./models/post.js";
 import { User } from "./models/user.js";
 
@@ -23,7 +23,6 @@ function loadUsers()
       user.username,
     ));
     localStorage.setItem("users",JSON.stringify(users));
-    //render
   })
   .catch(err => console.error(err));
 
@@ -53,7 +52,6 @@ function loadPosts()
 }
 
 
-
 function findUsername(userId)
 {
   for(let user of users)
@@ -69,7 +67,7 @@ function renderPosts(posts)
 {
   for(let post of posts)
   {
-    addPost(post,findUsername(post.userId),false);
+    addPost(post,findUsername(post.userId));
   }
 }
 

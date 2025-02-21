@@ -44,8 +44,8 @@ body{
 }
 footer{
     position:absolute;
-    border-style: solid;
-    border-color:rgb(91, 89, 89);
+    border-top-style: solid;
+    border-top-color:rgb(91, 89, 89);
     width:100%;
 }
 
@@ -54,4 +54,20 @@ footer{
     color:rgb(236, 231, 231);
    text-decoration: none; 
    background-color: none;
+}
+
+.reactions{
+    display:flex;
+}
+
+.postSection{
+    margin-bottom:1rem;
+}
+
+.comment{
+    border-style:solid;
+    border-radius:0.5rem;
+    border-color: rgb(91, 89, 89);
+    margin-top:2rem;
+    
 }
