@@ -1,5 +1,5 @@
 import { getPostsFromDummyJson, getUsersFromDummyJson } from "./load.js";
-import { addPost } from "./toMainPage.js";
+import { addPost,createPost } from "./toMainPage.js";
 import { Post } from "./models/post.js";
 import { User } from "./models/user.js";
 
@@ -12,10 +12,14 @@ function loadUsers()
   const usersItem = localStorage.getItem("users");
   if(usersItem !== null)
   {
+    console.log("Loaded LocalStorage");
     users = JSON.parse(usersItem);
   }
-  getUsersFromDummyJson()
+  else
+  {
+    getUsersFromDummyJson()
   .then(res=>{
+    console.log("Loaded from DummyJson");
     users = res.map(user => new User(
       user.id,
       user.firstName,
@@ -25,6 +29,8 @@ function loadUsers()
     localStorage.setItem("users",JSON.stringify(users));
   })
   .catch(err => console.error(err));
+  }
+  
 
 }
 
@@ -71,12 +77,23 @@ function renderPosts(posts)
   }
 }
 
+export function showCreatePost()
+{
+    const createPostBtn = document.getElementById("createPostBtn");
+    createPostBtn.addEventListener("click",()=>{
+        createPost(users,posts);
+        loadPosts();
+    });
+    
+}
+
 function main()
 {
     console.log("Main was called");
    loadPosts();
    loadUsers();
    renderPosts(posts);
+   showCreatePost();
 
 }
 main();

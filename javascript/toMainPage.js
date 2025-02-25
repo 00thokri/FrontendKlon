@@ -1,4 +1,5 @@
 //This code does everything for the main page/index.html
+import { Post } from "./models/post.js";
 export let posts = [];
 
 export function addPost(sentPost, username)
@@ -59,10 +60,6 @@ export function addPost(sentPost, username)
 
 }
 
-export function displayUsers()
-{
-    //used to show the users in a dropdown when create post is clicked
-}
 
 function checkText(postText)
 {
@@ -72,3 +69,88 @@ function checkText(postText)
         postText.textContent = newText+"...";
     }
 }
+
+
+
+export function createPost(users,posts)
+{
+    const inputSection = document.getElementById("inputSection");
+    const userLabel = document.createElement('label');
+    userLabel.innerText = "Select User:";
+
+    const userSelect = document.createElement('select');
+    for(let user of users)
+    {
+        let option = document.createElement('option');
+        option.value = user.id;
+        option.innerText = user.username;
+        userSelect.append(option);
+    }
+    userSelect.classList.add("formInputs");
+    userSelect.name = "users";
+
+    const titleInput = document.createElement('input');
+    titleInput.type = "text";
+    titleInput.innerText = "Title";
+    titleInput.classList.add("formInputs");
+
+    const bodyInput = document.createElement('input');
+    bodyInput.type = "text"; 
+    bodyInput.innerText = "Text goes here";
+    bodyInput.classList.add("formInputs");
+
+    const tagInput = document.createElement('input');
+    tagInput.type = "text";
+    tagInput.innerText = "Tags go here";
+    tagInput.classList.add("formInputs");
+
+    const submitBtn = document.createElement('button');
+    submitBtn.innerText = "Submit";
+    submitBtn.classList.add("formInputs");
+    submitBtn.id = "submitPostBtn";
+    submitBtn.addEventListener("click",()=>{
+        //Save new post object in localStorage, then add post to page
+        const title = titleInput.value;
+        const body = bodyInput.value;
+        const tags = tagInput.value.split(",");
+        const userId = userSelect.value;
+        const postId = posts[posts.length-1].id + 1; //Should add 1 to last post id, to create a new id
+        const post = new Post(postId,title,body,tags,[0,0],userId);
+        addPost(post,users[userId-1].username);
+        posts.push(post);
+        localStorage.setItem("posts",JSON.stringify(posts));
+        alert("Post added to local storage");
+        
+        userSelect.remove();
+        titleInput.remove();
+        bodyInput.remove();
+        tagInput.remove();
+        submitBtn.remove();
+    });
+
+
+    inputSection.append(userLabel);
+    inputSection.append(userSelect);
+    inputSection.append(titleInput);
+    inputSection.append(bodyInput);
+    inputSection.append(tagInput);
+    inputSection.append(submitBtn);
+
+}
+/*
+    <label>Select User:</label>
+    <select name="users" class="formInputs">
+        <option value="1">User 1</option>
+        <option value="2">User 2</option>
+        <option value="3">User 3</option>
+        <option value="4">User 4</option>
+    </select>
+    
+    <form>
+        <label for="title">Title</label>
+        <input type="text" id="title" class="formInputs" name="title" value="Title">
+        <label for="inputBody">Text goes here</label>
+        <input type="text" id="inputBody" name="inputBody" class="formInputs" value="Text goes here">
+        <button id="submitPostBtn" class="formInputs">Submit</button>
+    </form>
+*/

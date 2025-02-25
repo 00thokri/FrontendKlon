@@ -37,6 +37,7 @@ function loadUsers()
 function loadPost() {
     //Posts should already be stored in local storage
     const postsItems = localStorage.getItem("posts");
+    
     const posts = JSON.parse(postsItems);
     for (let post of posts ) {
         if (post.id === postId)
@@ -54,19 +55,22 @@ function loadComments() {
   {
     comments = JSON.parse(commentsItem);
   }
-  getCommentsFromDummyJson(postId)
-  .then(res => {
-    comments = res.map(comment => new Comment(
-      comment.id,
-      comment.body,
-      comment.postId,
-      comment.userId,
-      comment.user,
-    ));
-    localStorage.setItem("comments",JSON.stringify(comments));
-    
-  })
-  .catch(err => console.error(err));
+  else{
+    getCommentsFromDummyJson(postId)
+    .then(res => {
+      comments = res.map(comment => new Comment(
+        comment.id,
+        comment.body,
+        comment.postId,
+        comment.userId,
+        comment.user,
+      ));
+      localStorage.setItem("comments",JSON.stringify(comments));
+      
+    })
+    .catch(err => console.error(err));
+  }
+
 }
 
 function renderComments(comments)
@@ -92,6 +96,7 @@ function main() {
     loadUsers();
     loadComments();
     let postToLoad = loadPost();
+    alert(postToLoad);
     showPost(findCommentUsername(postToLoad.userId), postToLoad);
     renderComments(comments);
 }

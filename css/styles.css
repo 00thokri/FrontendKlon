@@ -35,6 +35,7 @@ body{
     display:flex;
     margin-bottom:1rem;
 }
+
 .tag{
     background-color: rgb(43, 41, 41);
     border-style:solid;
@@ -71,3 +72,20 @@ footer{
     margin-top:2rem;
     
 }
+
+.formInputs{
+    display:block;
+    margin-bottom:1rem;
+}
+
+#inputSection
+{
+ margin-left:15rem;
+}
+
+#inputBody{
+    width: 50rem;
+    height: 10rem;
+}
+
+
