@@ -36,8 +36,21 @@ export async function getCommentsFromDummyJson(postId)
     {
         throw new Error("Failed to fetch comments");
     }
+    const commentsForPost = await response.json();
+    return commentsForPost.comments;
+    
+
+}
+
+export async function getAllCommentsFromDummyJson()
+{
+    const response = await fetch(dummy+"/comments?limit=0");
+
+    if(!response.ok)
+    {
+        throw new Error("Failed to fetch comments");
+    }
     const allComments = await response.json();
     return allComments.comments;
-    
 
 }

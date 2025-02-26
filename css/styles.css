@@ -81,11 +81,15 @@ footer{
 #inputSection
 {
  margin-left:15rem;
+ display:block;
+}
+
+textarea{
+    width:35rem;
+    height:10rem;
 }
 
 #inputBody{
-    width: 50rem;
-    height: 10rem;
+    margin-top:1.5rem;
 }
-
 

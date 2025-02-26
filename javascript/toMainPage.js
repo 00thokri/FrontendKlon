@@ -1,30 +1,18 @@
 //This code does everything for the main page/index.html
 import { Post } from "./models/post.js";
+//import { showCreatePost } from "./main.js";
 export let posts = [];
 
 export function addPost(sentPost, username)
 {
-    /* Goal:
-    <section id="postSection">
-<div class="post">
-    <h1>Post Title</h1>
-    <div class="username">username</div>
-    <p class="postBody">Example post that may only be 60 characters long. Will be re</p>
-    <span class="postTags">
-        <div class="tag">Tag 1</div>
-        <div class="tag">Tag 2</div>
-        <div class="tag">Tag 3</div>
-    </span>
-</div>
-    */
-   
-
+ 
     const postSection = document.getElementById("postSection");
     
     let div = document.createElement('div');
     div.classList.add("post");
 
     let postLink = document.createElement('a');
+    console.log("ID IS: sentPost.id");
     postLink.href = "post.html?postId=" + sentPost.id;
     postLink.classList.add("link");
 
@@ -36,11 +24,9 @@ export function addPost(sentPost, username)
     user.classList.add("username");
 
     let body = document.createElement('p'); //limit to 60 characters
-    body.classList.add("postBody");
+    //body.classList.add("inputBody");
     body.textContent = sentPost.body;
     checkText(body);
-    
-    
 
     let tagSpan = document.createElement('span');
     tagSpan.classList.add("postTags");
@@ -74,6 +60,10 @@ function checkText(postText)
 
 export function createPost(users,posts)
 {
+
+    const createButton = document.getElementById("createPostBtn");
+    createButton.remove();
+
     const inputSection = document.getElementById("inputSection");
     const userLabel = document.createElement('label');
     userLabel.innerText = "Select User:";
@@ -89,15 +79,20 @@ export function createPost(users,posts)
     userSelect.classList.add("formInputs");
     userSelect.name = "users";
 
+    const titleLabel = document.createElement('label');
+    titleLabel.innerText = "Title:";
+
     const titleInput = document.createElement('input');
     titleInput.type = "text";
     titleInput.innerText = "Title";
     titleInput.classList.add("formInputs");
 
-    const bodyInput = document.createElement('input');
-    bodyInput.type = "text"; 
-    bodyInput.innerText = "Text goes here";
+    const bodyInput = document.createElement('textarea');
+    bodyInput.placeholder = "Post content goes here";
     bodyInput.classList.add("formInputs");
+
+    const tagLabel = document.createElement('label');
+    tagLabel.innerText = "Tags:";
 
     const tagInput = document.createElement('input');
     tagInput.type = "text";
@@ -112,6 +107,7 @@ export function createPost(users,posts)
         //Save new post object in localStorage, then add post to page
         const title = titleInput.value;
         const body = bodyInput.value;
+        console.log(body);
         const tags = tagInput.value.split(",");
         const userId = userSelect.value;
         const postId = posts[posts.length-1].id + 1; //Should add 1 to last post id, to create a new id
@@ -126,31 +122,24 @@ export function createPost(users,posts)
         bodyInput.remove();
         tagInput.remove();
         submitBtn.remove();
+        titleLabel.remove();
+        userLabel.remove();
+        tagLabel.remove();
+        inputSection.append(createButton);
     });
 
 
     inputSection.append(userLabel);
     inputSection.append(userSelect);
-    inputSection.append(titleInput);
-    inputSection.append(bodyInput);
-    inputSection.append(tagInput);
-    inputSection.append(submitBtn);
 
-}
-/*
-    <label>Select User:</label>
-    <select name="users" class="formInputs">
-        <option value="1">User 1</option>
-        <option value="2">User 2</option>
-        <option value="3">User 3</option>
-        <option value="4">User 4</option>
-    </select>
+    inputSection.append(titleLabel);
+    inputSection.append(titleInput);
+
+    inputSection.append(bodyInput);
+
+    inputSection.append(tagLabel);
+    inputSection.append(tagInput);
+
+    inputSection.append(submitBtn);
     
-    <form>
-        <label for="title">Title</label>
-        <input type="text" id="title" class="formInputs" name="title" value="Title">
-        <label for="inputBody">Text goes here</label>
-        <input type="text" id="inputBody" name="inputBody" class="formInputs" value="Text goes here">
-        <button id="submitPostBtn" class="formInputs">Submit</button>
-    </form>
-*/
+}

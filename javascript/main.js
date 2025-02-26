@@ -3,16 +3,16 @@ import { addPost,createPost } from "./toMainPage.js";
 import { Post } from "./models/post.js";
 import { User } from "./models/user.js";
 
-export let posts = [];
-export let users = [];
-
+let posts = [];
+ let users = [];
+ let comments = [];
 
 function loadUsers()
 {
   const usersItem = localStorage.getItem("users");
   if(usersItem !== null)
   {
-    console.log("Loaded LocalStorage");
+    console.log("Loaded users from LocalStorage");
     users = JSON.parse(usersItem);
   }
   else
@@ -30,8 +30,6 @@ function loadUsers()
   })
   .catch(err => console.error(err));
   }
-  
-
 }
 
 function loadPosts()
@@ -80,9 +78,13 @@ function renderPosts(posts)
 export function showCreatePost()
 {
     const createPostBtn = document.getElementById("createPostBtn");
+    console.log(createPostBtn);
     createPostBtn.addEventListener("click",()=>{
+      
+      console.log("users: "+ users.length+ " posts: "+posts.length);
         createPost(users,posts);
         loadPosts();
+        
     });
     
 }
@@ -92,8 +94,10 @@ function main()
     console.log("Main was called");
    loadPosts();
    loadUsers();
-   renderPosts(posts);
    showCreatePost();
+   renderPosts(posts);
+   console.log("reached this point");
+   console.log("prob failed here");
 
 }
 main();

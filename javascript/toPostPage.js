@@ -1,9 +1,7 @@
 //import { Post } from "./models/post";
 //import { User } from "./models/user";
-//import { Comment } from "./models/comment";
-import { findCommentUsername } from "./postPage.js";
-
-//code to get the postId from the URL
+import { Comment } from "./models/comment.js";
+import { getUserFromId,updatePost } from "./postPage.js";
 
 
 
@@ -11,32 +9,48 @@ export function showPost(username, onePost)
 {
     const postSection = document.getElementById("postSection");
     
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     div.classList.add("post");
 
-    let h1 = document.createElement('h1');
+    const h1 = document.createElement('h1');
     h1.textContent = onePost.title;
     
-    let user = document.createElement('div');
+    const user = document.createElement('div');
     user.textContent = username;
     user.classList.add("username");
 
-    let body = document.createElement('p'); //limit to 60 characters
+    const body = document.createElement('p');
     body.classList.add("postBody");
     body.textContent = onePost.body;
 
-    let reactions = document.createElement('div');
+    const reactions = document.createElement('div');
     reactions.classList.add("reactions");
 
-    let likes = document.createElement('div');
-    likes.textContent = "likes: "+onePost.reactions.likes;
-    
+    const likes = document.createElement('div');
+    likes.classList.add("reactionButton");
 
-    let dislikes = document.createElement('div');
-    dislikes.textContent = "dislikes: "+onePost.reactions.dislikes;
+    const likeButton = document.createElement('button');
+    likeButton.textContent = "Likes: " + onePost.reactions.likes;
+    likeButton.addEventListener("click",()=>{
+        onePost.reactions.likes++;
+        likeButton.textContent = "Likes: "+onePost.reactions.likes;
+        updatePost(onePost);
+    });
+    likes.append(likeButton);
+
+    const dislikes = document.createElement('div');
+    dislikes.classList.add("reactionButton");
     
+    const dislikeButton = document.createElement('button');
+    dislikeButton.textContent = "dislikes: " + onePost.reactions.dislikes;
+    dislikeButton.addEventListener("click",()=>{
+        onePost.reactions.dislikes++;
+        dislikeButton.textContent = "dislikes: "+onePost.reactions.dislikes;
+        updatePost(onePost);
+    });
+    dislikes.append(dislikeButton);
   
-    let tagSpan = document.createElement('span');
+    const tagSpan = document.createElement('span');
     tagSpan.classList.add("postTags");
     for(const tag of onePost.tags)
     {
@@ -59,11 +73,6 @@ export function showPost(username, onePost)
 
 export function addComment(comment)
 {
-    /*
-    <div class="comment">
-        <div class="username">username</div>
-        <p class="commentBody">Example comment that may only be 60 characters long. Will be re</p>
-    */
    const commentSection = document.getElementById("commentSection");
    let commentDiv = document.createElement('div');
    commentDiv.classList.add("comment");
@@ -75,10 +84,61 @@ export function addComment(comment)
 
     let commentUser = document.createElement('div');
     commentUser.classList.add("username");
+    console.log("comment.user.username: "+comment.user.username);
     commentUser.textContent = comment.user.username; //?
     commentDiv.appendChild(commentUser);
     commentDiv.appendChild(commentBody);
     commentSection.append(commentDiv);
+
+}
+
+export function showCommentWindow(users,comments,postId)
+{
+    const inputSection = document.getElementById("inputSection");
+
+    const commentWindow = document.createElement('textarea');
+    commentWindow.placeholder = "Enter your comment here";
+    commentWindow.id = "inputBody";
+    commentWindow.classList.add("formInputs");
+
+    const userLabel = document.createElement('label');
+    userLabel.textContent = "Select User: ";
+    const userSelect = document.createElement('select');
+    for(let user of users)
+    {
+        let option = document.createElement('option');
+        option.value = user.id;
+        option.innerText = user.username;
+        userSelect.append(option);
+    }
+    userSelect.classList.add("formInputs");
+    userSelect.name = "users";
+
+    const submitComment = document.createElement('button');
+    submitComment.textContent = "Submit Comment";
+    submitComment.id = "submitCommentBtn";
+    submitComment.addEventListener("click",()=>{
+
+        const commentBody = document.getElementById("inputBody").value;
+        if(commentBody === "")
+        {
+            alert("You need to write something, comment not added");
+            return;
+        }   
+        commentWindow.value = " ";
+        const userId = userSelect.value;
+        const commentId = comments.length+1; 
+
+        const newComment = new Comment(commentId,commentBody,postId,userId,getUserFromId(userId));
+        addComment(newComment);
+        comments.push(newComment);
+        localStorage.setItem("comments",JSON.stringify(comments));
+    });
+
+    inputSection.append(commentWindow);
+    inputSection.append(userLabel);
+    inputSection.append(userSelect);
+    inputSection.append(submitComment);
 
 }
 
