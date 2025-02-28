@@ -33,8 +33,10 @@ function loadPosts() {
   const postsItem = localStorage.getItem("posts");
   if (postsItem !== null) {
     posts = JSON.parse(postsItem);
+    console.log("Loaded posts from LocalStorage");
   }
-  getPostsFromDummyJson()
+  else{
+    getPostsFromDummyJson()
     .then(res => {
       posts = res.map(post => new Post(
         post.id,
@@ -44,10 +46,13 @@ function loadPosts() {
         post.reactions,
         post.userId
       ));
+      console.log("Loaded posts from DummyJson");
       localStorage.setItem("posts", JSON.stringify(posts));
 
     })
     .catch(err => console.error(err));
+  }
+  
 }
 
 

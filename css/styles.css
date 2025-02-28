@@ -56,7 +56,10 @@ body {
     margin-right: 1rem;
     padding: 0.2rem;
 }
-
+#commentSection
+{
+    margin-bottom:2rem;
+}
 footer {
     position: absolute;
     border-top-style: solid;
@@ -130,6 +133,7 @@ button:hover {
     border-radius: 0.5rem;
     border-color: rgb(91, 89, 89);
     margin-top: 2rem;
+    padding:0.5rem;
 
 }
 
