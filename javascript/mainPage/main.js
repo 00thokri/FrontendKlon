@@ -1,7 +1,7 @@
-import { getPostsFromDummyJson, getUsersFromDummyJson } from "./load.js";
+import { getPostsFromDummyJson, getUsersFromDummyJson } from "../load.js";
 import { addPost,createPost } from "./toMainPage.js";
-import { Post } from "./models/post.js";
-import { User } from "./models/user.js";
+import { Post } from "../models/post.js";
+import { User } from "../models/user.js";
 
 let posts = [];
  let users = [];

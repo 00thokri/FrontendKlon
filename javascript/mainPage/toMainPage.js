@@ -1,5 +1,5 @@
 //This code does everything for the main page/index.html
-import { Post } from "./models/post.js";
+import { Post } from "../models/post.js";
 //import { showCreatePost } from "./main.js";
 export let posts = [];
 
@@ -110,8 +110,9 @@ export function createPost(users,posts)
         console.log(body);
         const tags = tagInput.value.split(",");
         const userId = userSelect.value;
+        const reactions = {likes:0,dislikes:0};
         const postId = posts[posts.length-1].id + 1; //Should add 1 to last post id, to create a new id
-        const post = new Post(postId,title,body,tags,[0,0],userId);
+        const post = new Post(postId,title,body,tags,reactions,userId);
         addPost(post,users[userId-1].username);
         posts.push(post);
         localStorage.setItem("posts",JSON.stringify(posts));

@@ -1,6 +1,6 @@
 //import { Post } from "./models/post";
 //import { User } from "./models/user";
-import { Comment } from "./models/comment.js";
+import { Comment } from "../models/comment.js";
 import { getUserFromId,updatePost } from "./postPage.js";
 
 

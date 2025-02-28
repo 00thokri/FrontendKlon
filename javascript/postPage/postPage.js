@@ -1,9 +1,9 @@
 
 import {showCommentWindow, showPost} from "./toPostPage.js";
 import {addComment} from "./toPostPage.js";
-import { Comment } from "./models/comment.js";
-import { User } from "./models/user.js";
-import { getAllCommentsFromDummyJson, getUsersFromDummyJson } from "./load.js";
+import { Comment } from "../models/comment.js";
+import { User } from "../models/user.js";
+import { getAllCommentsFromDummyJson, getUsersFromDummyJson } from "../load.js";
 //import {sendUsers, sendComments } from "./main.js";
 const queryParameters = window.location.search;
 const querySplit = queryParameters.split("=");
