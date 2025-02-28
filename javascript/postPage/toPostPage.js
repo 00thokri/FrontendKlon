@@ -6,7 +6,7 @@ import { getUserFromId, updatePost } from "./postPage.js";
 
 
 export function showPost(username, onePost) {
-    const postSection = document.getElementById("postSection");
+    const postSection = document.getElementById("selectedPostSection");
 
     const div = document.createElement('div');
     div.classList.add("post");
