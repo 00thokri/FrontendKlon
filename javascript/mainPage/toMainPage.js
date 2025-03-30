@@ -1,13 +1,12 @@
 //This code does everything for the main page/index.html
-import { Post } from "./models/post.js";
+import { Post } from "../models/post.js";
 //import { showCreatePost } from "./main.js";
 export let posts = [];
 
-export function addPost(sentPost, username)
-{
- 
+export function addPost(sentPost, username) {
+
     const postSection = document.getElementById("postSection");
-    
+
     let div = document.createElement('div');
     div.classList.add("post");
 
@@ -18,20 +17,18 @@ export function addPost(sentPost, username)
 
     let h1 = document.createElement('h1');
     h1.textContent = sentPost.title;
-    
+
     let user = document.createElement('div');
     user.textContent = username;
     user.classList.add("username");
 
     let body = document.createElement('p'); //limit to 60 characters
-    //body.classList.add("inputBody");
     body.textContent = sentPost.body;
     limitText(body);
 
     let tagSpan = document.createElement('span');
     tagSpan.classList.add("postTags");
-    for(const tag of sentPost.tags)
-    {
+    for (const tag of sentPost.tags) {
         let tagDiv = document.createElement('div')
         tagDiv.classList.add("tag");
         tagDiv.textContent = tag;
@@ -58,25 +55,26 @@ function limitText(postText)
 
 
 
-export function createPost(users,posts)
-{
+export function createPost(users, posts) {
 
     const createButton = document.getElementById("createPostBtn");
     createButton.remove();
+
+    const createPostDiv = document.createElement('div');
+    createPostDiv.classList.add("createPostDiv");
 
     const inputSection = document.getElementById("inputSection");
     const userLabel = document.createElement('label');
     userLabel.innerText = "Select User:";
 
     const userSelect = document.createElement('select');
-    for(let user of users)
-    {
+    for (let user of users) {
         let option = document.createElement('option');
         option.value = user.id;
         option.innerText = user.username;
         userSelect.append(option);
     }
-    userSelect.classList.add("formInputs");
+    userSelect.classList.add("formInputs"); 
     userSelect.name = "users";
 
     const titleLabel = document.createElement('label');
@@ -103,43 +101,40 @@ export function createPost(users,posts)
     submitBtn.innerText = "Submit";
     submitBtn.classList.add("formInputs");
     submitBtn.id = "submitPostBtn";
-    submitBtn.addEventListener("click",()=>{
+    submitBtn.addEventListener("click", () => {
         //Save new post object in localStorage, then add post to page
         const title = titleInput.value;
         const body = bodyInput.value;
         console.log(body);
         const tags = tagInput.value.split(",");
         const userId = userSelect.value;
-        const postId = posts[posts.length-1].id + 1; //Should add 1 to last post id, to create a new id
-        const post = new Post(postId,title,body,tags,[0,0],userId);
-        addPost(post,users[userId-1].username);
+        const reactions = { likes: 0, dislikes: 0 };
+        const postId = posts[posts.length - 1].id + 1; //Should add 1 to last post id, to create a new id
+        const post = new Post(postId, title, body, tags, reactions, userId);
+        addPost(post, users[userId - 1].username);
         posts.push(post);
-        localStorage.setItem("posts",JSON.stringify(posts));
-        alert("Post added to local storage");
+        localStorage.setItem("posts", JSON.stringify(posts));
         
-        userSelect.remove();
-        titleInput.remove();
-        bodyInput.remove();
-        tagInput.remove();
-        submitBtn.remove();
-        titleLabel.remove();
-        userLabel.remove();
-        tagLabel.remove();
+     
+        createPostDiv.remove();
         inputSection.append(createButton);
     });
 
 
-    inputSection.append(userLabel);
-    inputSection.append(userSelect);
 
-    inputSection.append(titleLabel);
-    inputSection.append(titleInput);
+    createPostDiv.append(userLabel)
+    createPostDiv.append(userSelect)
 
-    inputSection.append(bodyInput);
+    createPostDiv.append(titleLabel)
+    createPostDiv.append(titleInput)
 
-    inputSection.append(tagLabel);
-    inputSection.append(tagInput);
+    createPostDiv.append(bodyInput)
 
-    inputSection.append(submitBtn);
+    createPostDiv.append(tagLabel)
+    createPostDiv.append(tagInput)
+
+    createPostDiv.append(submitBtn);
+    inputSection.append(createPostDiv);
     
+
 }
