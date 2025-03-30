@@ -104,7 +104,6 @@ export function createPost(users, posts) {
         //Save new post object in localStorage, then add post to page
         const title = titleInput.value;
         const body = bodyInput.value;
-        console.log(body);
         const tags = tagInput.value.split(",");
         const userId = userSelect.value;
         const reactions = { likes: 0, dislikes: 0 };
