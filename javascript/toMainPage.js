@@ -26,7 +26,7 @@ export function addPost(sentPost, username)
     let body = document.createElement('p'); //limit to 60 characters
     //body.classList.add("inputBody");
     body.textContent = sentPost.body;
-    checkText(body);
+    limitText(body);
 
     let tagSpan = document.createElement('span');
     tagSpan.classList.add("postTags");
@@ -47,7 +47,7 @@ export function addPost(sentPost, username)
 }
 
 
-function checkText(postText)
+function limitText(postText)
 {
     if(postText.textContent.length > 57)
     {
