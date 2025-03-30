@@ -10,13 +10,13 @@ let comments = [];
 function loadUsers() {
   const usersItem = localStorage.getItem("users");
   if (usersItem !== null) {
-    console.log("Loaded users from LocalStorage");
+    
     users = JSON.parse(usersItem);
   }
   else {
     getUsersFromDummyJson()
       .then(res => {
-        console.log("Loaded from DummyJson");
+        
         users = res.map(user => new User(
           user.id,
           user.firstName,
@@ -33,7 +33,7 @@ function loadPosts() {
   const postsItem = localStorage.getItem("posts");
   if (postsItem !== null) {
     posts = JSON.parse(postsItem);
-    console.log("Loaded posts from LocalStorage");
+    
   }
   else{
     getPostsFromDummyJson()
@@ -46,7 +46,7 @@ function loadPosts() {
         post.reactions,
         post.userId
       ));
-      console.log("Loaded posts from DummyJson");
+      
       localStorage.setItem("posts", JSON.stringify(posts));
 
     })
@@ -72,10 +72,7 @@ function renderPosts(posts) {
 
 export function showCreatePost() {
   const createPostBtn = document.getElementById("createPostBtn");
-  console.log(createPostBtn);
   createPostBtn.addEventListener("click", () => {
-
-    console.log("users: " + users.length + " posts: " + posts.length);
     createPost(users, posts);
     loadPosts();
 
@@ -84,13 +81,11 @@ export function showCreatePost() {
 }
 
 function main() {
-  console.log("Main was called");
+  
   loadPosts();
   loadUsers();
   showCreatePost();
   renderPosts(posts);
-  console.log("reached this point");
-  console.log("prob failed here");
 
 }
 main();

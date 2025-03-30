@@ -90,7 +90,6 @@ export function addComment(comment) {
 
     let commentUser = document.createElement('div');
     commentUser.classList.add("username");
-    console.log("comment.user.username: " + comment.user.username);
     commentUser.textContent = comment.user.username; 
     commentDiv.appendChild(commentUser);
     commentDiv.appendChild(commentBody);

@@ -11,7 +11,6 @@ export function addPost(sentPost, username) {
     div.classList.add("post");
 
     let postLink = document.createElement('a');
-    console.log("ID IS: sentPost.id");
     postLink.href = "post.html?postId=" + sentPost.id;
     postLink.classList.add("link");
 
